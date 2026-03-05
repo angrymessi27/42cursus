@@ -11,99 +11,70 @@
 /* ************************************************************************** */
 #include "get_next_line.h"
 
-int	found_newline(t_list *list)
+size_t	ft_strlen(const char *s)
 {
-	int		i;
+	size_t	i;
 
-	if (!list)
+	i = 0;
+	if (!s)
 		return (0);
-	while (list)
-	{
-		i = 0;
-		while (list->content[i])
-		{
-			if (list->content[i] == '\n')
-				return (1);
-			i++;
-		}
-		list = list->next;
-	}
-	return (0);
+	while (s[i])
+		i++;
+	return (i);
 }
 
-t_list	*get_last_node(t_list *list)
+char	*ft_strchr(const char *s, int c)
 {
-	if (!list)
+	if (!s)
 		return (NULL);
-	while (list->next)
-		list = list->next;
-	return (list);
+	while (*s)
+	{
+		if (*s == (char)c)
+			return ((char *)s);
+		s++;
+	}
+	if ((char)c == '\0')
+		return ((char *)s);
+	return (NULL);
 }
 
-void	copy_str(t_list *list, char *str)
+char	*ft_strdup(const char *s1)
 {
-	int	i;
-	int	k;
+	char	*res;
+	size_t	i;
 
-	if (!list)
-		return ;
-	k = 0;
-	while (list)
-	{
-		i = 0;
-		while (list->content[i])
-		{
-			if (list->content[i] == '\n')
-			{
-				str[k++] = '\n';
-				str[k] = '\0';
-				return ;
-			}
-			str[k++] = list->content[i++];
-		}
-		list = list->next;
-	}
-	str[k] = '\0';
+	if (!s1)
+		return (NULL);
+	res = malloc(ft_strlen(s1) + 1);
+	if (!res)
+		return (NULL);
+	i = -1;
+	while (s1[++i])
+		res[i] = s1[i];
+	res[i] = '\0';
+	return (res);
 }
 
-int	len_to_newline(t_list *list)
+char	*ft_strjoin(char const *s1, char const *s2)
 {
-	int	i;
-	int	len;
+	char	*res;
+	size_t	i;
+	size_t	j;
 
-	if (!list)
-		return (0);
-	len = 0;
-	while (list)
+	if (!s1 && !s2)
+		return (NULL);
+	res = malloc(ft_strlen(s1) + ft_strlen(s2) + 1);
+	if (!res)
+		return (NULL);
+	i = 0;
+	while (s1 && s1[i])
 	{
-		i = 0;
-		while (list->content[i])
-		{
-			if (list->content[i] == '\n')
-			{
-				len++;
-				return (len);
-			}
-			len++;
-			i++;
-		}
-		list = list->next;
+		res[i] = s1[i];
+		i++;
 	}
-	return (len);
-}
-
-void	free_list(t_list **list, t_list *clean_node, char *buf)
-{
-	t_list	*tmp;
-
-	if (buf)
-		free(buf);
-	while (*list)
-	{
-		tmp = (*list)->next;
-		free((*list)->content);
-		free(*list);
-		*list = tmp;
-	}
-	*list = clean_node;
+	j = 0;
+	while (s2 && s2[j])
+		res[i++] = s2[j++];
+	res[i] = '\0';
+	return (res);
 }

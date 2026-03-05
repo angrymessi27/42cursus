@@ -23,8 +23,8 @@ int	main(void)
 	printf(NULL);
 	ft_printf(NULL);
 	
-	printf("hi\n");
-	ft_printf("hi\n");
+	printf("%c\n %s\n %p\n %d\n %i\n %u\n %x\n %X\n %%\n", '\0', "", NULL, 0, 0, 0, 0, 0);
+	ft_printf("%c\n %s\n %p\n %d\n %i\n %u\n %x\n %X\n %%\n", '\0', "", NULL, 0, 0, 0, 0, 0);
 	
 	printf("");
 	ft_printf("");

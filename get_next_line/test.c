@@ -1,28 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line.h                                    :+:      :+:    :+:   */
+/*   test.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: cjung <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/02/28 20:45:19 by cjung             #+#    #+#             */
-/*   Updated: 2026/02/28 20:45:23 by cjung            ###   ########.fr       */
+/*   Created: 2026/03/05 20:41:16 by cjung             #+#    #+#             */
+/*   Updated: 2026/03/05 21:06:28 by cjung            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-#ifndef GET_NEXT_LINE_H
-# define GET_NEXT_LINE_H
+#include <stdio.h>
+#include "get_next_line.h"
+#include <fcntl.h>
 
-# include <stdlib.h>
-# include <unistd.h>
+int	main(void)
+{
+	char	*line;
+	int	fd;
 
-# ifndef BUFFER_SIZE
-#  define BUFFER_SIZE 42
-# endif
-
-char	*get_next_line(int fd);
-char	*ft_strchr(const char *s, int c);
-char	*ft_strjoin(char const *s1, char const *s2);
-size_t	ft_strlen(const char *s);
-char	*ft_strdup(const char *s1);
-
-#endif
+	//fd = open("file", O_RDONLY);
+	fd = 0;
+	while ((line = get_next_line(fd)) != NULL)
+	{
+		printf("%s", line);
+		free(line);
+	}
+	return (0);
+}
